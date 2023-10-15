@@ -16,11 +16,14 @@ export default function LoginPage() {
 
     const password = passwordRef.current.value;
 
-    auth.signIn(email, password).then(() => {
+    auth.signIn(email, password)
+    .then(() => {
       console.log('Login success');
-    }, (reason) => { 
-      console.log('Login Failed');
-      console.error(reason);
+      auth.setError(null);
+    })
+    .catch ((error) => { 
+      console.error(error);
+      console.log('Login Failed');      
       auth.setError('Invalid Username or Password');
     });
   };
