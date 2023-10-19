@@ -1,5 +1,6 @@
 import { useRef }from 'react';
 import { ProductSchema } from '@common/ProductSchema';
+import { addProduct } from '@services/api/products';
 
 
 export default function FormProduct() {
@@ -16,8 +17,11 @@ export default function FormProduct() {
             categoryId: parseInt(formData.get('category')),
             images: [formData.get('images').name],
         };
-        console.log(data);
 
+        addProduct(data).then((response) => {
+          console.log(response);
+        });
+        
         const validation = await ProductSchema.validate(data);
         console.log({ validation });
     };
