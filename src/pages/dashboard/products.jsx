@@ -4,6 +4,7 @@ import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
 import Pagination from '@common/Pagination';
 import Modal from '@common/Modal';
+import FormProduct from '@components/FormProduct';
 
 const PRODUCT_LIMIT = 10;
 const PRODUCT_OFFSET = 0;
@@ -105,7 +106,7 @@ export default function products() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <h1>Hola Mundo</h1>
+        <FormProduct/>
       </Modal>
     </>
   );
