@@ -1,27 +1,38 @@
-import { useState,Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
-import Pagination from '@common/Pagination';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
+import axios from 'axios';
+import useAlert from '@hooks/useAlert';
+import Alert from '@common/Alert';
 
-const PRODUCT_LIMIT = 10;
-const PRODUCT_OFFSET = 0;
 
 
 export default function products() {
 
   const [open, setOpen] = useState(false);
 
-  const [offsetProducts, setOffsetProducts] = useState(0);
-
-  const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
-
   const [products, setProducts] = useState([]);
+
+  const [alert, setAlert, toggleAlert] = useAlert();
+
+  useEffect(() => { 
+    async function getProducts() {
+      const response = await axios.get(endPoints.products.allProducts);
+      setProducts(response.data);
+    }
+    try {
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [alert])
 
   return (
     <>
+      <Alert alert={alert} handleClose={toggleAlert} />
       <div className="lg:flex lg:items-center lg:justify-between">
         <div className="min-w-0 flex-1">
           <h2 className="mb-4 text-2xl font-bold leading-7 text-gray-700 sm:truncate sm:text-3xl sm:tracking-tight">List of Products</h2>
@@ -100,13 +111,12 @@ export default function products() {
                   ))}
                 </tbody>
               </table>
-              {totalProducts > 0 && <Pagination totalItems={totalProducts} itemsPerPage={PRODUCT_LIMIT} setOffset={setOffsetProducts} neighbours={3}></Pagination>}
             </div>
           </div>
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <FormProduct/>
+        <FormProduct setOpen={setOpen} setAlert={setAlert}/>
       </Modal>
     </>
   );
