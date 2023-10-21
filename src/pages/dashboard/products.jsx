@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { PlusIcon } from '@heroicons/react/20/solid';
+import { PlusIcon, XCircleIcon, trashIcon } from '@heroicons/react/20/solid';
 import endPoints from '@services/api';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
+import { deleteProduct } from '@services/api/products';
 
 
 
@@ -28,6 +29,26 @@ export default function Products() {
       console.log(error);
     }
   }, [alert])
+
+  const handleDelete = (id) => {
+    deleteProduct(id)
+    .then(() => {
+      setAlert({
+        active: true,
+        message: 'Delete product successfully',
+        type: 'success',
+        autoClose: false,
+      });
+    })  
+    .catch((error) => {
+      setAlert({
+        active: true,
+        message: error.message,
+        type: 'error',
+        autoClose: false,
+      });
+    });
+  }
 
   return (
     <>
@@ -68,10 +89,10 @@ export default function Products() {
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Id
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       <span className="sr-only">Edit</span>
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       <span className="sr-only">Delete</span>
                     </th>
                   </tr>
@@ -96,15 +117,14 @@ export default function Products() {
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${product.price}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.category.id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium ">
                         <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
                           Edit
                         </a>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                        <XCircleIcon className='flex-shrink-0 h-6 w-6  text-gray-400 cursor-pointer'
+                          onClick={() => handleDelete(product.id)}/>
                       </td>
                     </tr>
                   ))}
