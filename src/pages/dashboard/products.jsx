@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { PlusIcon } from '@heroicons/react/20/solid';
-import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
@@ -10,13 +9,13 @@ import Alert from '@common/Alert';
 
 
 
-export default function products() {
+export default function Products() {
 
   const [open, setOpen] = useState(false);
 
   const [products, setProducts] = useState([]);
 
-  const [alert, setAlert, toggleAlert] = useAlert();
+  const {alert, setAlert, toggleAlert} = useAlert();
 
   useEffect(() => { 
     async function getProducts() {
