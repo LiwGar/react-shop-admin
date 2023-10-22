@@ -1,9 +1,13 @@
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
 import { ProductSchema } from '@common/ProductSchema';
-import { addProduct } from '@services/api/products';
+import { addProduct, updateProduct } from '@services/api/products';
 
 
 export default function FormProduct({setOpen, setAlert, product}) {
+
+  const router = useRouter();
+
   const formRef = useRef(null);
 
   const handleSubmit = async (event) => {
@@ -12,14 +16,20 @@ export default function FormProduct({setOpen, setAlert, product}) {
   const formData = new FormData(formRef.current);
     
   const data = {
-      title: formData.get('title'),
+      title: formData.get('title'), 
       price: parseInt(formData.get('price')),
       description: formData.get('description'),
       categoryId: parseInt(formData.get('category')),
       images: [formData.get('images').name],
     };
+    
+  if (product) {
 
-  const validation = await ProductSchema.validate(data);
+    updateProduct(product.id, data)
+    .then(() => {
+        router.push('/dashboard/products/')
+      }); 
+  } else {
 
     addProduct(data)
     .then(() => {
@@ -39,6 +49,10 @@ export default function FormProduct({setOpen, setAlert, product}) {
         autoClose: false,
       });
     });
+  }
+
+  const validation = await ProductSchema.validate(data);
+  
   };
 
 return (
