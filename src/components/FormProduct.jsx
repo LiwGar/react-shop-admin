@@ -25,10 +25,27 @@ export default function FormProduct({setOpen, setAlert, product}) {
     
   if (product) {
 
-    updateProduct(product.id, data)
+    
+    const validation = await ProductSchema.validate(data).then(() => { 
+      updateProduct(product.id, data)
     .then(() => {
-        router.push('/dashboard/products/')
-      }); 
+      router.push('/dashboard/products/');
+      setAlert({
+        active: true,
+        message: 'Product update successfully',
+        type: 'success',
+        autoClose: false,
+      });
+    });
+    })  
+    .catch(function(error) {
+      setAlert({
+        active: true,
+        message: error.message,
+        type: 'error',
+        autoClose: false,
+      });
+    });
   } else {
 
     addProduct(data)
@@ -51,7 +68,7 @@ export default function FormProduct({setOpen, setAlert, product}) {
     });
   }
 
-  const validation = await ProductSchema.validate(data);
+  
   
   };
 

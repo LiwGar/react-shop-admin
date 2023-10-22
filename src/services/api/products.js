@@ -24,7 +24,7 @@ const updateProduct = async (id, body) => {
       'Content-Type': 'application/json',
     },
   };
-  const response = await axios.put(endPoints.products.updateProduct(id), body, config);
+  const response = await axios.put(endPoints.products.updateProducts(id), body, config);
   return response.data;
 };
 
