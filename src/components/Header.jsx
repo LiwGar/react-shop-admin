@@ -19,8 +19,7 @@ function classNames(...classes) {
 }
 
 export default function Header() {
-
-  const auth = useAuth();   
+  const auth = useAuth();
 
   const userData = {
     name: auth?.user?.name,
@@ -82,7 +81,7 @@ export default function Header() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <button onClick={() => auth.logut()} className='block px-4 py-2 text-sm text-gray-700'>
+                          <button onClick={() => auth.logut()} className="block px-4 py-2 text-sm text-gray-700">
                             Logout
                           </button>
                         </Menu.Items>
@@ -94,7 +93,7 @@ export default function Header() {
                   {/* Mobile menu button */}
                   <Disclosure.Button className="bg-gray-700 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
-                    {open ? <XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon  className="block h-6 w-6" aria-hidden="true" />}
+                    {open ? <XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />}
                   </Disclosure.Button>
                 </div>
               </div>

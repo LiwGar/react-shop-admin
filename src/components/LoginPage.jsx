@@ -5,31 +5,31 @@ import { useAuth } from '@hooks/useAuth';
 
 export default function LoginPage() {
   const emailRef = useRef(null);
-  
+
   const passwordRef = useRef(null);
-  
+
   const auth = useAuth();
 
   const router = useRouter();
 
   const submitHandler = (event) => {
-
     event.preventDefault();
 
     const email = emailRef.current.value;
 
     const password = passwordRef.current.value;
 
-    auth.signIn(email, password)
-    .then(() => {
-      router.push('/dashboard');
-      auth.setError(null);
-    })
-    .catch ((error) => { 
-      console.error(error);
-      console.log('Login Failed');      
-      auth.setError('Invalid Username or Password');
-    });
+    auth
+      .signIn(email, password)
+      .then(() => {
+        router.push('/dashboard');
+        auth.setError(null);
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log('Login Failed');
+        auth.setError('Invalid Username or Password');
+      });
   };
 
   return (
