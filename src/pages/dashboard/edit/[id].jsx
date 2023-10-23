@@ -13,11 +13,9 @@ export default function Edit () {
 
     const [product, setProduct] = useState({});
 
-    // const [notFound, setNotFound] = useState(false);
-
     const [open, setOpen] = useState(false);
     
-    const { alert, setAlert, toggleAlert } = useAlert();
+    const {alert, setAlert, toggleAlert} = useAlert();
 
 
     useEffect(() => {
