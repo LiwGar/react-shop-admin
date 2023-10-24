@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Next Shop Admin
 
-## Getting Started
+Curso Profesional de Next.JS
 
-First, run the development server:
+## Link
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Live Site URL: [react-shop-admin](https://react-shop-admin-afvuniu79-liwgars-projects.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Preview
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![Final_Home](https://github.com/LiwGar/react-shop-admin/assets/111103295/68fc7056-889c-4bff-a7b8-6be26ffccea7)
+![Final_Login](https://github.com/LiwGar/react-shop-admin/assets/111103295/bb35d5e3-e74d-4bcb-9c10-82cb0fc7443e)
+![Final_Dashboard](https://github.com/LiwGar/react-shop-admin/assets/111103295/df344b9a-024f-4c93-b7bd-078a036a8b56)
+![Final_Products](https://github.com/LiwGar/react-shop-admin/assets/111103295/0cd75553-ca9c-4c05-987f-f569f206bfc6)
+![Final_addproduct](https://github.com/LiwGar/react-shop-admin/assets/111103295/dc538d18-3b61-4318-8907-b4063aaccc6e)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Built with
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Git $ Github
+- NPM
+- Semantic HTML5 markup
+- TailwindCSS
+- [React](https://reactjs.org/) - JS library
+- [Next.js](https://nextjs.org/) - React framework
 
-## Learn More
+### What I learned
 
-To learn more about Next.js, take a look at the following resources:
+- Consumir una API para crear un dashboard de productos, para obtener, crear, actualizar y eliminar productos. 
+- Integracion del sistema de autenticación y  diferentes tecnologías como Tailwind CSS.
+- -Finalmente se realizo deploy con Vercel. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Website - [Liwgar](https://liwgar.github.io/00_personal_portfolio/)
