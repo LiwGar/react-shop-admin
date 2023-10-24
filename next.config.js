@@ -4,6 +4,6 @@ module.exports = {
 		ignoreDuringBuilds: true,
 	},
 	images: {
-		domains: ['placeimg.com','api.lorem.space','vuzoon.com','www.complementosdelcafe.com'],
+		domains: [ 'tailwindui.com', 'placeimg.com','api.lorem.space','vuzoon.com','www.complementosdelcafe.com'],
 	},
 };
