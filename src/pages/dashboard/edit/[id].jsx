@@ -1,62 +1,56 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import FormProduct from "@components/FormProduct";
-import axios from "axios";
-import endPoints from "@services/api";
-import Alert from "@common/Alert";
-import useAlert from "@hooks/useAlert";
+import FormProduct from '@components/FormProduct';
+import axios from 'axios';
+import endPoints from '@services/api';
+import Alert from '@common/Alert';
+import useAlert from '@hooks/useAlert';
 
+export default function Edit() {
+  const router = useRouter();
 
-export default function Edit () {
+  const [product, setProduct] = useState({});
 
-    const router = useRouter();
+  const [open, setOpen] = useState(false);
 
-    const [product, setProduct] = useState({});
+  const [error, setError] = useState(false);
 
-    const [open, setOpen] = useState(false);
-    
-    const {alert, setAlert, toggleAlert} = useAlert();
+  const { alert, setAlert, toggleAlert } = useAlert();
 
+  useEffect(() => {
+    const { id } = router.query;
 
-    useEffect(() => {
+    if (!router.isReady) return;
 
-        const { id } = router.query;
+    async function getProduct() {
+      const response = await axios.get(endPoints.products.getProduct(id));
+      return response;
+    }
+    getProduct()
+      .then((response) => {
+        setError(false);
+        setProduct(response.data);
+      })
+      .catch((error) => {
+        setError(true);
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: true,
+        });
+      });
+  }, [router.isReady, router.query, setAlert]);
 
-        if (!router.isReady) return;
-
-        async function getProduct() {
-
-            try {
-
-                const response = await axios.get(endPoints.products.getProduct(id));
-        
-                if (response) {
-                    setProduct(response.data);
-                }
-            }
-            catch (error) {
-                console.log(error);
-                setNotFound(true);
-            }
-        }
-
-        getProduct().catch((error) => router.push('/notFound')); 
-
-    }, [router?.isReady]);
-
+  if (error) {
+    return  <Alert alert={alert} handleClose={toggleAlert} />;
+  }
     return (
-    <>   
-      	<Alert alert={alert} handleClose={toggleAlert}/>
-		<FormProduct setOpen={setOpen} setAlert={setAlert} product={product}/>
-    </>  
-    )
-    
+        <>
+            <Alert alert={alert} handleClose={toggleAlert} />
+            <FormProduct setOpen={setOpen} setAlert={setAlert} product={product} />
+        </>
+  );
 }
 
 
-
-// return notFound ? 
-// <div 
-//     className="mx-4 mb-4 text-2xl font-bold leading-7 text-gray-700 sm:truncate sm:text-3xl sm:tracking-tight">
-//     Product Not Found
-// </div> : <FormProduct product = {product}/>

@@ -2,11 +2,12 @@ import { Fragment } from 'react';
 import { useAuth } from '@hooks/useAuth';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from "next/link";
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Products', href: '/dashboard/products/', current: false },
-  { name: 'Ventas', href: '#', current: false },
+  { name: "Dashboard", href: "/dashboard", current: true },
+  { name: "Products", href: "/dashboard/products/", current: false },
+  { name: "Sales", href: "/dashboard", current: false },
 ];
 
 const userNavigation = [
@@ -41,14 +42,14 @@ export default function Header() {
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(item.current ? 'bg-gray-700 text-white' : 'text-[#cbd5e1] hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium')}
                           aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -81,7 +82,7 @@ export default function Header() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <button onClick={() => auth.logut()} className="block px-4 py-2 text-sm text-gray-700">
+                          <button onClick={() => auth.logout()} className="block px-4 py-2 text-sm text-gray-700">
                             Logout
                           </button>
                         </Menu.Items>
@@ -93,7 +94,11 @@ export default function Header() {
                   {/* Mobile menu button */}
                   <Disclosure.Button className="bg-gray-700 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
-                    {open ? <XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />}
+                    {open ? ( 
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" /> 
+                      ) : ( 
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                      )}
                   </Disclosure.Button>
                 </div>
               </div>
@@ -116,7 +121,13 @@ export default function Header() {
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <img className="h-10 w-10 rounded-full" src={userData.imageUrl} alt="" />
+                    <img 
+                      className="h-10 w-10 rounded-full" 
+                      src={userData.imageUrl} 
+                      alt=""
+                      width={100}
+                      height={100}
+                    />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">{userData.name}</div>
@@ -132,7 +143,12 @@ export default function Header() {
                 </div>
                 <div className="mt-3 px-2 space-y-1">
                   {userNavigation.map((item) => (
-                    <Disclosure.Button key={item.name} as="a" href={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                    <Disclosure.Button 
+                      key={item.name} 
+                      as="a" 
+                      href={item.href} 
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                    >
                       {item.name}
                     </Disclosure.Button>
                   ))}

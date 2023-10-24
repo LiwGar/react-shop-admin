@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useFetch = (endPoints) => {
+
   const [data, setData] = useState([]);
 
   async function fetchData() {
@@ -13,7 +14,7 @@ const useFetch = (endPoints) => {
     try {
       fetchData();
     } catch (error) {
-      console.log(error);
+      /* empty */
     }
   }, [endPoints]);
 

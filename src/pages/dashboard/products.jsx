@@ -29,7 +29,7 @@ export default function Products() {
     try {
       getProducts();
     } catch (error) {
-      console.log(error);
+      /* empty */
     }
   }, [alert])
 
@@ -56,7 +56,7 @@ export default function Products() {
   return (
     <>
       <Alert alert={alert} handleClose={toggleAlert} />
-      <div className="lg:flex lg:items-center lg:justify-between">
+      <div className="lg:flex lg:items-center lg:justify-between mb-4 mt-4">
         <div className="min-w-0 flex-1">
           <h2 className="mb-4 text-2xl font-bold leading-7 text-gray-700 sm:truncate sm:text-3xl sm:tracking-tight">List of Products</h2>
         </div>
@@ -92,10 +92,10 @@ export default function Products() {
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Id
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="relative px-6 py-3">
                       <span className="sr-only">Edit</span>
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="relative px-6 py-3">
                       <span className="sr-only">Delete</span>
                     </th>
                   </tr>
@@ -106,15 +106,13 @@ export default function Products() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            { product.images[0] && 
-                            <Image className="h-10 w-10 rounded-full" 
-                              loader={() => product.images[0]}
-                              src={product.images[0]} 
-                              layout="fixed" 
-                              width="50"
-                              height="50"
-                              alt="" />
-                            }
+                          <Image 
+                            className="h-10 w-10 rounded-full" 
+                            src={product.images} 
+                            width={100}
+                            height={100}
+                            alt=""
+                          />
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">{product.title}</div>
@@ -127,7 +125,7 @@ export default function Products() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${product.price}</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.category.id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium ">
                         <Link href={`/dashboard/edit/${product.id}`} className="text-indigo-600 hover:text-indigo-900">
                           Edit
